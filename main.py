@@ -12,20 +12,20 @@ screen = pygame.display.set_mode((screenWidth, screenHeight))
 
 # Title and Icon
 pygame.display.set_caption("Space Invader")
-icon = pygame.image.load("ufo.png")
+icon = pygame.image.load("images/ufo.png")
 pygame.display.set_icon(icon)
 
 # Background Init
 
-background = pygame.image.load("background.jpg")
+background = pygame.image.load("images/background.jpg")
 background = pygame.transform.scale(background, (800, 600))
 
 # Background Sound
-mixer.music.load("background.wav")
+mixer.music.load("sounds/background.wav")
 mixer.music.play(-1)
 
 # Player Initialization
-playerImg = pygame.image.load("player.png")
+playerImg = pygame.image.load("images/player.png")
 playerImgSize = playerImg.get_size()
 
 # Center of player is at half screen width
@@ -50,7 +50,7 @@ ennemyXDirection = []
 
 for i in range(numOfEnnemies):
     # Ennemy Initialization
-    ennemyImg.append(pygame.image.load("ennemy.png"))
+    ennemyImg.append(pygame.image.load("images/ennemy.png"))
     ennemyImgSize.append(ennemyImg[i].get_size())
 
     # Center of ennemy is random on x axis
@@ -68,7 +68,7 @@ for i in range(numOfEnnemies):
     ennemyXDirection.append(np.random.choice([1, -1]))
 
 # Laser Initialization
-laserImg = pygame.image.load("laser.png")
+laserImg = pygame.image.load("images/laser.png")
 laserImgSize = laserImg.get_size()
 
 # Center of laser is initially aligned with spaceship
@@ -151,7 +151,7 @@ while running:
                     # Current location of spaceship
                     laserX = playerX + 1 / 2 * playerImgSize[0] - 1 / 2 * laserImgSize[0]
                     fireLaser(laserX, laserY)
-                    laserSound = mixer.Sound("laser.wav")
+                    laserSound = mixer.Sound("sounds/laser.wav")
                     laserSound.play()
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
@@ -200,7 +200,7 @@ while running:
         laserYCenter = laserY + 1 / 2 * laserImgSize[1]
         collision = isCollision(ennemyXCenter, ennemyYCenter, laserXCenter, laserYCenter)
         if collision:
-            collisionSound = mixer.Sound("explosion.wav")
+            collisionSound = mixer.Sound("sounds/explosion.wav")
             collisionSound.play()
             laserY = playerY + laserImgSize[1]
             laserState = "ready"
